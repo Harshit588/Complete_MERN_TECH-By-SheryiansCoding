@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 min-h-screen py-10 flex flex-col items-center">
+    <div class="w-full max-w-2xl bg-white p-6 rounded-xl shadow-lg">
+      <h1 class="text-3xl font-bold text-center text-blue-600 mb-6">
+        Create a Task
+      </h1>
+      <form action="/add-task" method="POST" class="space-y-4">
+        <input
+          type="text"
+          name="title"
+          placeholder="Enter Task Title"
+          required
+          class="w-full p-3 border rounded-md"
+        />
+        <input
+          type="text"
+          name="description"
+          placeholder="Enter Task Description"
+          required
+          class="w-full p-3 border rounded-md"
+        />
+        <button
+          type="submit"
+          class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+        >
+          Create Task
+        </button>
+      </form>
+    </div>
+
+    <div class="w-full max-w-2xl mt-10 space-y-4">
+      <% if (files.length > 0) { %> <% files.forEach(file => { %>
+      <div class="bg-white p-4 rounded shadow-md">
+        <h2 class="text-xl font-semibold text-gray-800"><%= file %></h2>
+        <div class="flex gap-4 mt-2 text-sm">
+          <a href="/Files/<%= file %>" class="text-green-600 hover:underline"
+            >View</a
+          >
+          <a
+            href="/Files/update/<%= file %>"
+            class="text-blue-600 hover:underline"
+            >Update</a
+          >
+          <a
+            href="/Files/delete/<%= file %>"
+            class="text-red-600 hover:underline"
+            onclick="return confirm('Are you sure?')"
+            >Delete</a
+          >
+        </div>
+      </div>
+      <% }); %> <% } else { %>
+      <h2 class="text-center text-gray-600">No tasks found.</h2>
+      <% } %>
+    </div>
+  </body>
+</html>
